@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid #000;
+}
+
+#colorPicker {
+    margin-top: 10px;
+}
