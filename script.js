@@ -63,6 +63,7 @@ function shareDrawing() {
     alert('Sharing functionality not implemented yet.');
 }
 
+
 undoButton.addEventListener('click', undoDrawing);
 
 function undoDrawing() {
@@ -86,3 +87,5 @@ function undoDrawing() {
         }
     }
 }
+
+
