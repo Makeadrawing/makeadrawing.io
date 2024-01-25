@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Draw and Share</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Drawing App</title>
 </head>
 <body>
-    <div class="toolbar">
-        <select id="brushSize">
-            <option value="1">1</option>
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-        </select>
-        <input type="color" id="color" value="#000000">
-        <input type="checkbox" id="eraser"> Eraser
-        <button onclick="undoDrawing()">Undo</button>
-        <button onclick="downloadDrawing()">Download</button>
-        <button onclick="shareDrawing()">Share</button>
+    <div id="drawing-container">
+        <canvas id="drawing-canvas" width="800" height="600"></canvas>
     </div>
-    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+    <div id="tools-container">
+        <label for="color">Couleur :</label>
+        <input type="color" id="color" value="#000000">
+
+        <label for="line-width">Grosseur :</label>
+        <input type="range" id="line-width" min="1" max="20" value="5">
+
+        <button onclick="erase()">Effacer la dernière action</button>
+        <button onclick="clearCanvas()">Effacer tout</button>
+
+        <a id="download" download="dessin.png" onclick="downloadCanvas()">Télécharger</a>
+    </div>
 
     <script src="script.js"></script>
 </body>
