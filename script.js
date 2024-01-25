@@ -3,6 +3,7 @@ const context = canvas.getContext('2d');
 const colorPicker = document.getElementById('color');
 const eraserCheckbox = document.getElementById('eraser');
 const undoButton = document.getElementById('undo');
+const brushSizeSelect = document.getElementById('brushSize');
 
 let isDrawing = false;
 let isErasing = false;
@@ -23,7 +24,7 @@ function startDrawing(e) {
 function draw(e) {
     if (!isDrawing && !isErasing) return;
 
-    context.lineWidth = 5;
+    context.lineWidth = parseInt(brushSizeSelect.value, 10);
     context.lineCap = 'round';
     context.strokeStyle = isErasing ? '#ffffff' : colorPicker.value;
 
