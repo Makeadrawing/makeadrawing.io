@@ -44,6 +44,11 @@ function clearCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function openColorPicker() {
+    // Ouvre le sélecteur de couleur quand le bouton est cliqué
+    colorInput.click();
+}
+
 function downloadCanvas() {
     const dataURL = canvas.toDataURL('image/png');
     downloadLink.href = dataURL;
