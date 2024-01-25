@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Draw and Share</title>
+    <title>Simple Drawing App</title>
 </head>
 <body>
     <canvas id="drawingCanvas" width="800" height="600"></canvas>
-    <div id="colorPicker">
-        <input type="color" id="color" value="#000000">
+    <div id="colorPickerContainer">
+        <label for="colorPicker">Choisir une couleur : </label>
+        <input type="color" id="colorPicker" value="#000000">
     </div>
-    <button onclick="downloadDrawing()">Download</button>
-    <button onclick="shareDrawing()">Share</button>
+    <button onclick="downloadDrawing()">Télécharger le dessin</button>
+    <button onclick="shareDrawing()">Partager le dessin</button>
 
     <script src="script.js"></script>
 </body>
