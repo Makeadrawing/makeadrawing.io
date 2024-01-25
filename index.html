@@ -7,14 +7,20 @@
     <title>Draw and Share</title>
 </head>
 <body>
-    <canvas id="drawingCanvas" width="800" height="600"></canvas>
-    <div id="colorPicker">
+    <div class="toolbar">
+        <select id="brushSize">
+            <option value="1">1</option>
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
         <input type="color" id="color" value="#000000">
+        <input type="checkbox" id="eraser"> Eraser
+        <button id="undo">Undo</button>
+        <button onclick="downloadDrawing()">Download</button>
+        <button onclick="shareDrawing()">Share</button>
     </div>
-    <input type="checkbox" id="eraser"> Eraser
-    <button onclick="undoDrawing()">Undo</button>
-    <button onclick="downloadDrawing()">Download</button>
-    <button onclick="shareDrawing()">Share</button>
+    <canvas id="drawingCanvas" width="800" height="600"></canvas>
 
     <script src="script.js"></script>
 </body>
