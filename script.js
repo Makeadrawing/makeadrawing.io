@@ -68,10 +68,23 @@ function shareDrawing() {
 undoButton.addEventListener('click', undoDrawing);
 
 function undoDrawing() {
-    if (paths.length > 0) {
-        paths.pop();
+    if (drawingMoves.length > 0) {
+        // Retirer le dernier mouvement
+        drawingMoves.pop();
+
+        // Effacer le canevas
         context.clearRect(0, 0, canvas.width, canvas.height);
-        redrawAllPaths();
+
+        // Redessiner en utilisant les mouvements restants
+        for (const moves of drawingMoves) {
+            if (moves.length > 0) {
+                context.beginPath();
+                context.moveTo(moves[0].x, moves[0].y);
+                for (const move of moves) {
+                    context.lineTo(move.x, move.y);
+                }
+                context.stroke();
+          
     }
 }
 
