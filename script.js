@@ -8,6 +8,7 @@ const brushSizeSelect = document.getElementById('brushSize');
 let isDrawing = false;
 let isErasing = false;
 let drawingMoves = [];  // Tableau pour stocker les mouvements
+let paths = []; // Tableau pour stocker les trajectoires individuelles
 
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', draw);
@@ -42,6 +43,7 @@ function draw(e) {
 
 function stopDrawing() {
     isDrawing = false;
+    paths.push([...drawingMoves[drawingMoves.length - 1]]);
     context.beginPath();
 }
 
@@ -63,29 +65,25 @@ function shareDrawing() {
     alert('Sharing functionality not implemented yet.');
 }
 
-
 undoButton.addEventListener('click', undoDrawing);
 
 function undoDrawing() {
-    if (drawingMoves.length > 0) {
-        // Retirer le dernier mouvement
-        drawingMoves.pop();
-
-        // Effacer le canevas
+    if (paths.length > 0) {
+        paths.pop();
         context.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Redessiner en utilisant les mouvements restants
-        for (const moves of drawingMoves) {
-            if (moves.length > 0) {
-                context.beginPath();
-                context.moveTo(moves[0].x, moves[0].y);
-                for (const move of moves) {
-                    context.lineTo(move.x, move.y);
-                }
-                context.stroke();
-            }
-        }
+        redrawAllPaths();
     }
 }
 
-
+function redrawAllPaths() {
+    for (const path of paths) {
+        if (path.length > 0) {
+            context.beginPath();
+            context.moveTo(path[0].x, path[0].y);
+            for (const point of path) {
+                context.lineTo(point.x, point.y);
+            }
+            context.stroke();
+        }
+    }
+}
