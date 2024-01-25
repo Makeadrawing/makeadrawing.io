@@ -20,11 +20,19 @@ function draw(e) {
     context.lineCap = 'round';
     context.strokeStyle = colorPicker.value;
 
-    context.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    // Calcul des coordonnées de la souris par rapport au canevas
+    const mouseX = e.clientX - canvas.offsetLeft;
+    const mouseY = e.clientY - canvas.offsetTop;
+
+    // Dessin du trait
+    context.lineTo(mouseX, mouseY);
     context.stroke();
+
+    // Déplacer le point de départ pour éviter de connecter chaque dessin
     context.beginPath();
-    context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    context.moveTo(mouseX, mouseY);
 }
+
 
 function stopDrawing() {
     isDrawing = false;
