@@ -40,9 +40,31 @@ function stopDrawing() {
 }
 
 function downloadDrawing() {
-    const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-    window.location.href = image;
+    // Obtenez le canevas
+    const canvas = document.getElementById('drawingCanvas');
+
+    // Créez un lien de téléchargement
+    const downloadLink = document.createElement('a');
+
+    // Convertissez le contenu du canevas en image PNG
+    const image = canvas.toDataURL('image/png');
+
+    // Définissez l'attribut href du lien de téléchargement avec l'image
+    downloadLink.href = image;
+
+    // Définissez l'attribut de téléchargement avec le nom du fichier (facultatif)
+    downloadLink.download = 'drawing.png';
+
+    // Ajoutez le lien au document
+    document.body.appendChild(downloadLink);
+
+    // Cliquez sur le lien pour déclencher le téléchargement
+    downloadLink.click();
+
+    // Supprimez le lien du document
+    document.body.removeChild(downloadLink);
 }
+
 
 function shareDrawing() {
     // Implement sharing functionality (e.g., upload to a server or share a link)
