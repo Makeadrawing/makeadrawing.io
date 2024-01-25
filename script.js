@@ -13,6 +13,11 @@ canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mouseout', stopDrawing);
 
+// Événements tactiles
+canvas.addEventListener('touchstart', startDrawingTouch);
+canvas.addEventListener('touchmove', drawTouch);
+canvas.addEventListener('touchend', stopDrawing);
+
 function startDrawing(e) {
     drawing = true;
     [lastX, lastY] = [e.offsetX, e.offsetY];
@@ -20,20 +25,37 @@ function startDrawing(e) {
 
 function draw(e) {
     if (!drawing) return;
+    drawLine(lastX, lastY, e.offsetX, e.offsetY);
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+
+function startDrawingTouch(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    [lastX, lastY] = [touch.clientX, touch.clientY];
+    drawing = true;
+}
+
+function drawTouch(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    drawLine(lastX, lastY, touch.clientX, touch.clientY);
+    [lastX, lastY] = [touch.clientX, touch.clientY];
+}
+
+function stopDrawing() {
+    drawing = false;
+}
+
+function drawLine(startX, startY, endX, endY) {
     context.strokeStyle = colorInput.value;
     context.lineWidth = lineWidthInput.value;
     context.lineCap = 'round';
 
     context.beginPath();
-    context.moveTo(lastX, lastY);
-    context.lineTo(e.offsetX, e.offsetY);
+    context.moveTo(startX, startY);
+    context.lineTo(endX, endY);
     context.stroke();
-
-    [lastX, lastY] = [e.offsetX, e.offsetY];
-}
-
-function stopDrawing() {
-    drawing = false;
 }
 
 function erase() {
@@ -45,7 +67,6 @@ function clearCanvas() {
 }
 
 function openColorPicker() {
-    // Ouvre le sélecteur de couleur quand le bouton est cliqué
     colorInput.click();
 }
 
